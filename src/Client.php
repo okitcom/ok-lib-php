@@ -8,6 +8,7 @@ namespace OK;
 
 
 use OK\Credentials\APICredentials;
+use OK\Credentials\Environment\ProductionEnvironment;
 use OK\Model\Network\Exception\NetworkException;
 
 class Client {
@@ -28,7 +29,13 @@ class Client {
      */
     public function __construct(APICredentials $credentials) {
         $this->credentials = $credentials;
-        $this->base_url = "https://" . $credentials->getEnvironment()->getPath() . ".okit.io/" . $this->credentials->path();
+
+        // Development environment is separated from the production environment
+        if ($credentials->getEnvironment() instanceof ProductionEnvironment) {
+            $this->base_url = "https://" . $credentials->getEnvironment()->getPath() . ".okit.com/" . $this->credentials->path();
+        } else {
+            $this->base_url = "https://" . $credentials->getEnvironment()->getPath() . ".okit.io/" . $this->credentials->path();
+        }
     }
 
     /**
