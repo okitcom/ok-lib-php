@@ -9,8 +9,8 @@ abstract class Environment
 {
 
     /**
-     * Environment path part
+     * Environment base url.
      * @return string
      */
-    abstract function getPath();
+    abstract function getBaseUrl();
 }

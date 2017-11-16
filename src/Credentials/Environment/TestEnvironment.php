@@ -13,7 +13,7 @@ class TestEnvironment extends Environment
      * Environment path part
      * @return string
      */
-    function getPath() {
-        return "test";
+    function getBaseUrl() {
+        return "works-api-test.okit.io";
     }
 }

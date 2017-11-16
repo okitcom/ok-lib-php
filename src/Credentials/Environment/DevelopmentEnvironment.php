@@ -13,7 +13,7 @@ class DevelopmentEnvironment extends Environment
      * Environment path part
      * @return string
      */
-    function getPath() {
-        return "works-api-dev";
+    function getBaseUrl() {
+        return "works-api-dev.okit.io";
     }
 }

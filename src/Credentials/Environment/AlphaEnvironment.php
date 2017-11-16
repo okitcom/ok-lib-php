@@ -13,7 +13,7 @@ class AlphaEnvironment extends Environment
      * Environment path part
      * @return string
      */
-    function getPath() {
-        return "alpha";
+    function getBaseUrl() {
+        return "works-api-alpha.okit.io";
     }
 }

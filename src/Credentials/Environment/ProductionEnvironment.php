@@ -13,7 +13,7 @@ class ProductionEnvironment extends Environment
      * Environment path part
      * @return string
      */
-    function getPath() {
-        return "secure";
+    function getBaseUrl() {
+        return "works-api.okit.com";
     }
 }
