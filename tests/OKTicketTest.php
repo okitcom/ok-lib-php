@@ -45,9 +45,9 @@ class OKTicketTest extends ServiceTest
 
         $ticket = new TicketObject();
         $ticket->event = $event;
-        $ticket->externalId = "PHPUNITOKLIB" . time();
+        $ticket->externalId = "PHPUNITOKLIB" . mt_rand();
         $ticket->barcodeType = "QR";
-        $ticket->barcode = "PHPUNITOKLIB" . time();
+        $ticket->barcode = "PHPUNITOKLIB" . mt_rand();
         $ticket->data = "Ticket data";
 
         $request = new \OK\Model\OKTicket\TicketPushRequest();

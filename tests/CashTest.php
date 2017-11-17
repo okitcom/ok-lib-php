@@ -83,7 +83,7 @@ class CashTest extends ServiceTest
     public function testCancelByReference() {
         $request = (new TransactionBuilder())
             ->setAmount(Amount::fromCents(1000))
-            ->setReference("PHPUnit tx " . time())
+            ->setReference("PHPUnit tx " . mt_rand())
             ->build();
 
         $res = $this->service->request($request);
@@ -94,7 +94,7 @@ class CashTest extends ServiceTest
     public function testGetByReference() {
         $request = (new TransactionBuilder())
             ->setAmount(Amount::fromCents(1000))
-            ->setReference("PHPUnit tx ref " . time())
+            ->setReference("PHPUnit tx ref " . mt_rand())
             ->build();
 
         $response = $this->service->request($request);
