@@ -123,23 +123,6 @@ class CashTest extends ServiceTest
     }
 
     public function testGetLineItemsTwo() {
-        $request = new Transaction();
-        $request->amount = 1500;
-        $request->reference = "PHPUnit tx";
-
-        $product1 = LineItem::create(1,
-            null,
-            "Beschrijving",
-            Amount::fromEuro(10.00),
-            0,
-            "EUR");
-        $product2 = LineItem::create(1,
-            null,
-            "Beschrijving 2",
-            Amount::fromEuro(5.00),
-            0,
-            "EUR");
-
         $request = (new TransactionBuilder())
             ->setAmount(Amount::fromCents(1500))
             ->setReference("PHPUnit tx")
@@ -168,9 +151,42 @@ class CashTest extends ServiceTest
         $this->assertEquals(2, count($result->lineItems->all()));
     }
 
-    public function testRefund() {
-        $this->markTestSkipped("Infeasible to test");
-    }
+    public function testLineItemsDiscount() {
+        $request = (new TransactionBuilder())
+            ->setAmount(Amount::fromCents(1250))
+            ->setReference("PHPUnit tx")
+            ->addLineItem(
+                (new LineItemBuilder())
+                    ->setAmount(Amount::fromCents(1000))
+                    ->setVat(0)
+                    ->setCurrency("EUR")
+                    ->setQuantity(1)
+                    ->setDescription("Beschrijving")
+                    ->addSubItem(
+                        (new LineItemBuilder())
+                        ->setAmount(Amount::fromCents(-250))
+                        ->setVat(0)
+                        ->setCurrency("EUR")
+                        ->setQuantity(1)
+                        ->setDescription("Discount")
+                        ->build()
+                    )
+                    ->build()
+            )
+            ->addLineItem(
+                (new LineItemBuilder())
+                    ->setAmount(Amount::fromCents(500))
+                    ->setVat(0)
+                    ->setCurrency("EUR")
+                    ->setQuantity(1)
+                    ->setDescription("Beschrijving 2")
+                    ->build()
+            )
+            ->build();
 
+        $result = $this->service->request($request);
+
+        $this->assertEquals(2, count($result->lineItems->all()));
+    }
 
 }

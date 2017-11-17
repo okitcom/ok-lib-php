@@ -48,7 +48,7 @@ class TransactionBuilderTest extends TestCase
 
     public function testAttributesLineItems() {
         $builder = new TransactionBuilder();
-        $response = $builder->setReference("merchantRef123")
+        $response = $builder->setReference("MERCHANT_REFERENCE")
             ->setType("LOGIN")
             ->setPermissions("NewPendingTrigger")
             ->addAttribute(
@@ -78,5 +78,4 @@ class TransactionBuilderTest extends TestCase
 
         $this->assertEquals("Suggested Name", $response->attributes->get("NAME")->suggestedValue);
     }
-
 }

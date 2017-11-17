@@ -9,6 +9,7 @@ namespace OK\Builder;
 
 use OK\Model\Amount;
 use OK\Model\Cash\LineItem;
+use OK\Model\Cash\LineItems;
 
 /**
  * Class LineItemBuilder
@@ -28,5 +29,17 @@ class LineItemBuilder extends GenericBuilder
 {
     function getObject() {
         return new LineItem;
+    }
+
+    /**
+     * @param LineItem $lineItem
+     * @return $this
+     */
+    public function addSubItem(LineItem $lineItem) {
+        if (!isset($this->object->subItems)) {
+            $this->object->subItems = LineItems::init([]);
+        }
+        $this->object->subItems->add($lineItem);
+        return $this;
     }
 }

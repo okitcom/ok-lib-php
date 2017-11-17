@@ -90,7 +90,7 @@ class LineItem extends JSONObject implements \JsonSerializable
     public $totalCurrency;
 
     /**
-     * @var LineItems Sub items added by OK for this line items, discounts and awarded points/punches. Sub line items will also appear in the line items array.
+     * @var LineItems Sub items for this line items, discounts and awarded points/punches. Sub line items will also appear in the line items array.
      */
     public $subItems;
 
