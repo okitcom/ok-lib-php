@@ -14,6 +14,7 @@ class Open extends BaseService
      * Initiate a new authorisation request.
      * @param AuthorisationRequest $request
      * @return AuthorisationRequest object.
+     * @throws \OK\Model\Network\Exception\NetworkException
      */
     public function request(AuthorisationRequest $request)
     {
@@ -24,6 +25,7 @@ class Open extends BaseService
      * Get the status of an authorisation request.
      * @param $guid string authorisation request guid
      * @return AuthorisationRequest partially filled object
+     * @throws \OK\Model\Network\Exception\NetworkException
      */
     public function status($guid) {
         $method = $guid . '/status';
@@ -34,6 +36,7 @@ class Open extends BaseService
      * Get an authorisation request including its data.
      * @param $guid string authorisation request guid
      * @return AuthorisationRequest
+     * @throws \OK\Model\Network\Exception\NetworkException
      */
     public function get($guid) {
         return new AuthorisationRequest($this->client->get($guid));

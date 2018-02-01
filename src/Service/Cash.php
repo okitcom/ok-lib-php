@@ -18,6 +18,7 @@ class Cash extends BaseService
      * Issue new transaction request.
      * @param $request Transaction request object
      * @return Transaction result
+     * @throws NetworkException
      */
     public function request(Transaction $request) {
         return new Transaction($this->client->post('transactions', $request));
@@ -28,6 +29,7 @@ class Cash extends BaseService
      *
      * @param $guid string Already saved token of user
      * @return Transaction response
+     * @throws NetworkException
      */
     public function status($guid) {
         $method = 'transactions/' . $guid . '/status';
@@ -38,6 +40,7 @@ class Cash extends BaseService
      * Get a transaction
      * @param $guid string identifier of transaction
      * @return Transaction response
+     * @throws NetworkException
      */
     public function get($guid) {
         $method = 'transactions/' . $guid . '';
@@ -48,6 +51,7 @@ class Cash extends BaseService
      * Get a transaction by reference
      * @param $reference string reference
      * @return Transaction response
+     * @throws NetworkException
      */
     public function getByReference($reference) {
         return new Transaction($this->client->get('transactions', [
@@ -92,6 +96,7 @@ class Cash extends BaseService
      * @param $guid string identifier of transaction
      * @param $refundAmount Amount amount to refund in cents
      * @return string
+     * @throws NetworkException
      */
     public function refund($guid, Amount $refundAmount) {
         return new Transaction(

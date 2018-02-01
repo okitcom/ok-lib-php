@@ -15,6 +15,7 @@ class OKTicket extends BaseService {
      * Push a ticket.
      * @param TicketPushRequest $req
      * @return TicketPushResponse JSON
+     * @throws \OK\Model\Network\Exception\NetworkException
      */
     public function push(TicketPushRequest $req) {
         return new TicketPushResponse($this->client->post("push", $req));

@@ -18,6 +18,7 @@ class Ticketing extends BaseService {
      * Returns the ticket
      * @param $guid string Ticket's identifier
      * @return TicketObject object with ticket data
+     * @throws \OK\Model\Network\Exception\NetworkException
      */
     public function get($guid) {
         return new TicketObject($this->client->get('tickets/' . $guid));
@@ -27,6 +28,7 @@ class Ticketing extends BaseService {
      * Creates a ticket
      * @param TicketObject $ticket
      * @return TicketObject
+     * @throws \OK\Model\Network\Exception\NetworkException
      */
     public function create(TicketObject $ticket) {
         $response = $this->client->post('tickets', array('ticket' => $ticket));
@@ -37,11 +39,18 @@ class Ticketing extends BaseService {
      * Updates the ticket
      * @param TicketObject $ticket
      * @return mixed
+     * @throws \OK\Model\Network\Exception\NetworkException
      */
     public function update(TicketObject $ticket) {
         return new TicketObject($this->client->post('tickets/' . $ticket->guid, array("ticket" => $ticket)));
     }
 
+    /**
+     * @param TicketObject $ticket
+     * @param $token
+     * @return TicketObject
+     * @throws \OK\Model\Network\Exception\NetworkException
+     */
     public function push(TicketObject $ticket, $token) {
         $url = "tickets/push";
         $ticket->issuedTo = $token;
@@ -56,6 +65,7 @@ class Ticketing extends BaseService {
      * @param $terminalId integer _optional_ terminal id
      * @param $location Location _optional_ location
      * @return TicketCheckIn result
+     * @throws \OK\Model\Network\Exception\NetworkException
      */
     public function check($eventId, $barcode, $terminalId = null, Location $location = null) {
         return new TicketCheckIn($this->client->post('check', [
@@ -79,6 +89,7 @@ class Ticketing extends BaseService {
      * Retrieve a list of tickets
      * @param ListTicketRequest $request
      * @return string result
+     * @throws \OK\Model\Network\Exception\NetworkException
      */
     public function getList(ListTicketRequest $request) {
         return new TicketObject($this->client->get("tickets", $request)); // TODO: FORMAT as right object, list vs. single object
