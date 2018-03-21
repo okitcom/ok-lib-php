@@ -80,6 +80,11 @@ class Transaction extends JSONObject
     public $checkoutType;
 
     /**
+     * @var string Unique merchant reference of the purchase, displayed to the consumer
+     */
+    public $purchaseId;
+
+    /**
      * @var string Space seperated list of applicable campaign
      * GUIDs. These campaigns are used in addition
      * to the campaigns OK determined applicable
