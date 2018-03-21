@@ -112,6 +112,8 @@ class LineItem extends JSONObject implements \JsonSerializable
             case "totalAmount":
             case "Amount":
                 return Amount::fromCents($value);
+            case "excludedFromCampaigns":
+                return boolval($value);
         }
         return parent::customValue($key, $value);
     }
