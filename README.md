@@ -46,7 +46,7 @@ $cash->request($request);
 To make an authorisation request:
 ```
 // Set up credentials
-$credentials = new OK\Credentials\OpenCredentials(PUBLICKEY, PRIVATEKEY, , new ProductionEnvironment());
+$credentials = new OK\Credentials\OpenCredentials(PUBLICKEY, PRIVATEKEY, new ProductionEnvironment());
 $open = new OK\Service\Open($credentials)
   
 $request = (new AuthorisationRequestBuilder())
