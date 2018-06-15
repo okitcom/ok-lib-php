@@ -14,7 +14,7 @@ Instantiate a service from `OK\Service` with OKWORKS credentials
 ### Set up
 First create the necessary credentials.
 
-`$credentials = new OK\Credentials\CashCredentials(PUBLICKEY, PRIVATEKEY, ENVIRONMENT)`
+`$credentials = new OK\Credentials\CashCredentials(PUBLICKEY, PRIVATEKEY, new ProductionEnvironment())`
 
 Then, initiate the service.
 
@@ -34,6 +34,7 @@ $request = (new TransactionBuilder())
                     ->setCurrency("EUR")
                     ->setQuantity(1)
                     ->setDescription("Awesome product")
+                    ->setProductCode("SKU-AWESOME")
                     ->build()
             )
             ->build();
@@ -45,7 +46,7 @@ $cash->request($request);
 To make an authorisation request:
 ```
 // Set up credentials
-$credentials = new OK\Credentials\OpenCredentials(PUBLICKEY, PRIVATEKEY, ENVIRONMENT);
+$credentials = new OK\Credentials\OpenCredentials(PUBLICKEY, PRIVATEKEY, , new ProductionEnvironment());
 $open = new OK\Service\Open($credentials)
   
 $request = (new AuthorisationRequestBuilder())
